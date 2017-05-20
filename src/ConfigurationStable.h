@@ -7,11 +7,13 @@ using namespace std;
 #ifndef SRC_CONFIGURATIONSTABLE_H_
 #define SRC_CONFIGURATIONSTABLE_H_
 
-#define STABLECONFPOS		3
+#define STABLECONFPOS		5
 
 #define POS_ALLSAT	0
 #define POS_IN 		1
 #define POS_OUT		2
+#define POS_DC_IMPR	3
+#define POS_DS_IMPR	4
 
 /**
  * @class ConfigurationCompleteLengthException
@@ -61,6 +63,16 @@ public:
 	bool allSat() const
 	{
 		return this->conf[POS_ALLSAT];
+	}
+
+	bool isDCImpr() const
+	{
+		return this->conf[POS_DC_IMPR];
+	}
+
+	bool isDSImpr() const
+	{
+		return this->conf[POS_DS_IMPR];
 	}
 
 };

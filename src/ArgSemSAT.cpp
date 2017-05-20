@@ -24,7 +24,7 @@ string semantics;
 string problem;
 Encoding global_enc("101010");
 ConfigurationPreferred confPreferred("111100");
-ConfigurationStable confStable("011");
+ConfigurationStable confStable("10011");
 ConfigurationSemiStable confSemiStable("00");
 ConfigurationComplete confComplete("1");
 string path;

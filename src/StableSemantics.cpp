@@ -14,26 +14,10 @@
 bool StableSemantics::compute(Argument *arg, bool firstonly)
 {
 
-	if (this->conf->allSat())
+	if (this->conf->allSat() && arg == NULL)
 	{
-		if (arg != NULL)
-		{
-			throw new AllSATStableException();
-		}
 		bool res = this->allsat(this->sat_pigreek, &(this->labellings), NULL,
 		NULL, -1);
-
-		// DS
-		if (arg != NULL)
-		{
-			for (vector<Labelling>::iterator l = this->labellings.begin();
-					l != this->labellings.end(); l++)
-			{
-				if (!(*l).inargs()->exists(arg))
-					return false;
-			}
-			return true;
-		}
 
 		// SE
 		if (firstonly)
@@ -114,11 +98,11 @@ bool StableSemantics::compute(Argument *arg, bool firstonly)
 	//	this->labellings.clear();
 }
 
-bool StableSemantics::credulousAcceptance(Argument *arg)
+bool StableSemantics::credulousAcceptanceComplete(Argument *arg)
 {
 	return super::credulousAcceptance(arg);
 }
-int StableSemantics::credulousAcceptanceImproved(Argument *arg)
+bool StableSemantics::credulousAcceptanceImproved(Argument *arg)
 {
 	Labelling res = Labelling();
 	if(this->satlab(sat_pigreek, &res))
@@ -128,14 +112,14 @@ int StableSemantics::credulousAcceptanceImproved(Argument *arg)
 		compute.appendOrClause(OrClause(1, arg->InVar()));
 		Labelling res = Labelling();
 		if(this->satlab(compute, &res))
-			return 1;
+			return true;
 		else
-			return 0;
+			return false;
 	}
-	return -1;
+	return false;
 }
 
-int StableSemantics::skepticalAcceptanceImproved(Argument *arg)
+bool StableSemantics::skepticalAcceptanceImproved(Argument *arg)
 {
 	Labelling res = Labelling();
 	if(this->satlab(sat_pigreek, &res))
@@ -145,14 +129,38 @@ int StableSemantics::skepticalAcceptanceImproved(Argument *arg)
 		compute.appendOrClause(OrClause(1, arg->OutVar()));
 		Labelling res = Labelling();
 		if(this->satlab(compute, &res))
-			return 0;
+			return false;
 		else
-			return 1;
+			return true;
 	}
-	return -1;
+	return true;
+}
+
+bool StableSemantics::credulousAcceptance(Argument *arg)
+{
+	if (this->conf->isDCImpr())
+	{
+		return this->credulousAcceptanceImproved(arg);
+	}
+	else
+	{
+		return this->credulousAcceptanceComplete(arg);
+	}
 }
 
 bool StableSemantics::skepticalAcceptance(Argument *arg)
+{
+	if (this->conf->isDSImpr())
+	{
+		return this->skepticalAcceptanceImproved(arg);
+	}
+	else
+	{
+		return this->compute(arg, false);
+	}
+}
+
+/*bool StableSemantics::skepticalAcceptance(Argument *arg)
 {
 	this->cleanlabs();
 	SATFormulae compute = SATFormulae(3 * this->af->numArgs());
@@ -206,7 +214,7 @@ bool StableSemantics::skepticalAcceptance(Argument *arg)
 	}
 	return true;
 
-}
+}*/
 
 SetArguments *StableSemantics::someExtension()
 {

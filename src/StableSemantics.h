@@ -28,10 +28,11 @@ class StableSemantics: public Semantics
 public:
 	bool compute(Argument *arg = NULL, bool firstonly = false);
 	bool credulousAcceptance(Argument *arg);
+	bool credulousAcceptanceComplete(Argument *arg);
 	bool skepticalAcceptance(Argument *arg);
 
-	int credulousAcceptanceImproved(Argument *arg);
-	int skepticalAcceptanceImproved(Argument *arg);
+	bool credulousAcceptanceImproved(Argument *arg);
+	bool skepticalAcceptanceImproved(Argument *arg);
 	SetArguments *someExtension();
 	/**
 	 * @see CompleteSemantics#CompleteSemantics

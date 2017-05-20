@@ -31,7 +31,7 @@ using namespace std;
 
 #define HG(a) static const char *hgrev = a;
 
-#define PUBLIC_RELEASE "1.0.3"
+#define PUBLIC_RELEASE "1.0.4"
 #ifndef PUBLIC_RELEASE
 #include "hgversion.h"
 #else

@@ -176,6 +176,8 @@ int parseParams(int argc, char *argv[])
 			satsolver = string(path) + "/" + defaultsolver;
 
 			satsolver = string(argv[++k]);
+
+			confStable = ConfigurationStable("01111");
 		}
 		else if (string("--minisat-var-decay").compare(argv[k]) == 0)
 		{
@@ -307,7 +309,7 @@ void showHelp(const char *rev)
 	cout
 			<< "--prefConf <IntIN><IntOUT><ExtIN><ExtOUT><Stable><ImprovedVersion> sequence of 6 booleans without spaces: by default 111100. This configuration is used for the EE task, skipping the last boolean. When DS task is considered, if <ImprovedAlgorithm>=1 a new algorithm for the calculation is used, <Stable> is skipped, and the other booleans maintain their meaning"
 			<< endl;
-	cout << "--stabConf <AllSAT><IN><OUT><DC Impr><DS Impr> sequence of 5 booleans without spaces: by default 10011. If <AllSAT>=1, the other two booleans will be ignored unless it is used in conjunction to EE-PR" << endl;
+	cout << "--stabConf <AllSAT><IN><OUT><DC Impr><DS Impr> sequence of 5 booleans without spaces: by default 10011 unless an external sat solver is selected, in that case is 01111. If <AllSAT>=1, the other two booleans will be ignored unless it is used in conjunction to EE-PR" << endl;
 	cout << "--semistabConf <AllSAT><OldVersion> sequence of 2 booleans without spaces: by default 00. If <OldVersion>=1, the other boolean will be ignored" << endl;
 	cout << "--complConf <AllSAT> 1 boolean: by default 0." << endl;
 

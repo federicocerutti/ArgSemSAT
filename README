@@ -1,24 +1,30 @@
-AUTHORS:
+# ArgSemSAT
 
-Federico Cerutti, f.cerutti@abdn.ac.uk 
-Mauro Vallati, m.vallati@hud.ac.uk
-Massimiliano Giacomin, massimiliano.giacomin@unibs.it
-Tobia Zanetti, t.zanetti001@studenti.unibs.it
+ArgSemSAT is the winner of the preferred semantics track of the [International Competition of Computational Models of Argumentation 2017](http://argumentationcompetition.org/2017/index.html) and the running-up for the semi-stable semantics track of the same competition, as well as for the overall [International Competition of Computational Models of Argumentation 2015](http://argumentationcompetition.org/2015/index.html). 
 
-*****
-INSTRUCTIONS 
-*****
+Description and main citation for this piece of work, please use:
 
-for compiling the system:
+Federico Cerutti, Massimiliano Giacomin, Mauro Vallati,
+How we designed winning algorithms for abstract argumentation and which insight we attained,
+Artificial Intelligence,
+Volume 276,
+2019,
+Pages 1-40,
+ISSN 0004-3702,
+[https://doi.org/10.1016/j.artint.2019.08.001](https://doi.org/10.1016/j.artint.2019.08.001).
+([http://www.sciencedirect.com/science/article/pii/S0004370218302650](http://www.sciencedirect.com/science/article/pii/S0004370218302650))
 
-./build
 
-for running the system, see the probo interfaces. For example:
+##INSTRUCTIONS 
 
-./ArgSemSAT -f $inputfile -p EE-PR -fo apx
+For compiling the system:
 
----
+`./build`
 
-for the full list of parameters:
+For running the system, see the probo interfaces. For example:
 
-./ArgSemSAT --help
+`./ArgSemSAT -f $inputfile -p EE-PR -fo apx`
+
+For the full list of parameters:
+
+`./ArgSemSAT --help`

@@ -44,7 +44,9 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: pre-build main-build
+all:
+	$(MAKE) --no-print-directory pre-build
+	$(MAKE) --no-print-directory main-build
 
 # Main-build Target
 main-build: ArgSemSAT
@@ -53,7 +55,7 @@ main-build: ArgSemSAT
 ArgSemSAT: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C++ Linker'
-	g++  -o "ArgSemSAT" $(OBJS) $(USER_OBJS) $(LIBS)
+	clang++  -o "ArgSemSAT" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -66,7 +68,6 @@ pre-build:
 	-if [ "$$(hg -q id > /dev/null 2>&1; echo $$?)" = "0" ]; then echo "HG(\"\$$Revision: $$(hg -q id -n) [$$(hg -q id)]\$$\");" >  ../src/hgversion.h; sed -i ../ArgSemSAT.doxyfile -e "s/\$$Revision: .*\$$/\$$Revision: $$(hg -q id -n) [$$(hg -q id)] \$$/g"; fi
 	-@echo ' '
 
-.PHONY: all clean dependents
-.SECONDARY: main-build pre-build
+.PHONY: all clean dependents main-build pre-build
 
 -include ../makefile.targets
